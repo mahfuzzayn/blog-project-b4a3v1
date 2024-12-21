@@ -65,7 +65,7 @@ const getAllBlogsFromDB = async (query: Record<string, unknown>) => {
     const blogQuery = new QueryBuilder(
         Blog.find()
             .populate('author', '-__v -isBlocked -role -createdAt -updatedAt')
-            .select('-__v -isPublished'),
+            .select('-__v -isPublished -createdAt -updatedAt'),
         query,
     )
         .search(blogSearchableFields)

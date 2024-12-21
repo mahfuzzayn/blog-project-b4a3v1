@@ -1,0 +1,52 @@
+{
+    "message": "Welcome to the Blog API",
+    "description": "This API allows you to manage blogs, users, and perform authentication and authorization operations. It supports CRUD operations on blogs and includes search, sort, and filter functionalities.",
+    "endpoints": [
+        {
+            "path": "/api/auth/register",
+            "methods": {
+                "POST": "Register a new user"
+            }
+        },
+        {
+            "path": "/api/auth/login",
+            "methods": {
+                "POST": "Login user and generate JWT token"
+            }
+        },
+        {
+            "path": "/api/blogs",
+            "methods": {
+                "GET": "Retrieve all blogs (public)",
+                "POST": "Create a new blog (user must be logged in)"
+            }
+        },
+        {
+            "path": "/api/blogs/:id",
+            "methods": {
+                "PATCH": "Update a blog by ID (only the blog author can update)",
+                "DELETE": "Delete a blog by ID (only the blog author can delete)"
+            }
+        },
+        {
+            "path": "/api/admin/users/:userId/block",
+            "methods": {
+                "PATCH": "Admin can block a user"
+            }
+        },
+        {
+            "path": "/api/admin/blogs/:id",
+            "methods": {
+                "DELETE": "Admin can delete any blog by ID"
+            }
+        },
+        {
+            "path": "/api/blogs/revenue",
+            "methods": {
+                "GET": "Get the total revenue from all orders"
+            }
+        }
+    ],
+    "documentation": "For more details, visit [GitHub Repository](https://github.com/mahfuzzayn/blog-project-b4a3v1)",
+    "devInfo": "Developed by Mahfuz Zayn"
+}
