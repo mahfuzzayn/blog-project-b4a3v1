@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AppError from '../../errors/AppError'
 import { TUser } from '../User/user.interface'
 import { User } from '../User/user.model'
@@ -48,8 +49,7 @@ const loginUserFromDB = async (payload: TLoginUser) => {
     }
 
     const jwtPayload = {
-        userName: user?.name,
-        userEmail: user?.email,
+        userId: (user as any)._id,
         role: user?.role,
     }
 

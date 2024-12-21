@@ -12,6 +12,7 @@ export interface TUser {
 export type TUserRole = keyof typeof UserRoles
 
 export interface UserModel extends Model<TUser> {
+    isUserExistsById(id: string): Promise<TUser>
     isUserExistsByEmail(email: string): Promise<TUser>
     isPasswordMatched(
         plainPassword: string,

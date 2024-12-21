@@ -53,6 +53,10 @@ userSchema.post('save', function (doc, next) {
 })
 
 // UserModel Methods
+userSchema.statics.isUserExistsById = async function (id: string) {
+    return await User.findById(id).select('+password')
+}
+
 userSchema.statics.isUserExistsByEmail = async function (email: string) {
     return await User.findOne({ email }).select('+password')
 }

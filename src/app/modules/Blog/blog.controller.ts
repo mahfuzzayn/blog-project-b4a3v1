@@ -4,7 +4,7 @@ import { BlogServices } from './blog.service'
 import httpStatus from 'http-status'
 
 const createBlog = catchAsync(async (req, res) => {
-    const result = await BlogServices.createBlogIntoDB(req.body)
+    const result = await BlogServices.createBlogIntoDB(req.user, req.body)
 
     sendResponse(res, {
         success: true,
@@ -14,6 +14,18 @@ const createBlog = catchAsync(async (req, res) => {
     })
 })
 
+const updateBlog = catchAsync(async (req, res) => {
+    const result = await BlogServices.updateBlogIntoDB(req.user, req.body)
+
+    sendResponse(res, {
+        success: true,
+        message: 'Blog updated successful',
+        statusCode: httpStatus.OK,
+        data: result,
+    })
+})
+
 export const BlogControllers = {
     createBlog,
+    updateBlog
 }

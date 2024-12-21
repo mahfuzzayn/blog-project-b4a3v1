@@ -11,6 +11,14 @@ const createBlogValidationSchema = z.object({
     }),
 })
 
+const updateBlogValidationSchema = z.object({
+    body: z.object({
+        title: z.string().optional(),
+        content: z.string().optional(),
+    }),
+})
+
 export const BlogValidations = {
     createBlogValidationSchema,
+    updateBlogValidationSchema,
 }
