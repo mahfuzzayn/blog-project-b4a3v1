@@ -8,12 +8,17 @@ type TResponse<T> = {
 }
 
 const sendResponse = <T>(res: Response, data: TResponse<T>) => {
-    res.status(data?.statusCode).json({
+    const response: Partial<TResponse<T>> = {
         success: data?.success,
         message: data?.message,
         statusCode: data?.statusCode,
-        data: data?.data || null,
-    })
+    }
+
+    if (data?.data !== undefined) {
+        response.data = data?.data
+    }
+
+    res.status(data?.statusCode).json(response)
 }
 
 export default sendResponse

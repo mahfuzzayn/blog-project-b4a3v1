@@ -45,7 +45,22 @@ const updateBlogIntoDB = async (
     return result
 }
 
+const deleteBlogFromDB = async (id: string, userData: JwtPayload) => {
+    const blog = await Blog.isBlogExistsById(id)
+
+    if (!blog) {
+        throw new AppError(httpStatus.NOT_FOUND, 'Blog not found!')
+    }
+
+    if (blog?.author.toString() !== userData?.userId) {
+        throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!')
+    }
+
+    await Blog.findByIdAndDelete(id)
+}
+
 export const BlogServices = {
     createBlogIntoDB,
     updateBlogIntoDB,
+    deleteBlogFromDB,
 }
