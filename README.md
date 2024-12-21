@@ -1,4 +1,4 @@
-# Blog Platform API
+# Blog Project API
 
 - **Live Server**: https://blog-project-mahfuzzayn.vercel.app/
 
