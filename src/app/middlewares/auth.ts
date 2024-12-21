@@ -33,7 +33,7 @@ const auth = (...roles: TUserRole[]) => {
         const isBlocked = user?.isBlocked
 
         if (isBlocked) {
-            throw new AppError(httpStatus.FORBIDDEN, 'This user is deleted!')
+            throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked!')
         }
 
         if (roles && !roles.includes(role)) {
