@@ -7,6 +7,8 @@ import { UserRoles } from '../User/user.const'
 
 const router = express.Router()
 
+router.get('/', BlogControllers.getAllBlogs)
+
 router.post(
     '/',
     auth(UserRoles.user),
