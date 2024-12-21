@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 
 export const createToken = (
     jwtPayload: {
+        userName: string
         userEmail: string
         role: string
     },

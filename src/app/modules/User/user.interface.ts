@@ -1,4 +1,5 @@
 import { Model } from 'mongoose'
+import { UserRoles } from './user.const'
 
 export interface TUser {
     name: string
@@ -7,6 +8,8 @@ export interface TUser {
     role: 'admin' | 'user'
     isBlocked: boolean
 }
+
+export type TUserRole = keyof typeof UserRoles
 
 export interface UserModel extends Model<TUser> {
     isUserExistsByEmail(email: string): Promise<TUser>
