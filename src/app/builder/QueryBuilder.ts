@@ -1,4 +1,6 @@
 import mongoose, { FilterQuery, Query } from 'mongoose'
+import AppError from '../errors/AppError'
+import httpStatus from 'http-status'
 
 class QueryBuilder<T> {
     public modelQuery: Query<T[], T>
@@ -27,7 +29,7 @@ class QueryBuilder<T> {
     }
 
     sortBy() {
-        const sortBy = this?.query?.sortBy
+        const sortBy = this?.query?.sortBy || 'createdAt'
 
         this.modelQuery = this.modelQuery.sort(sortBy as string)
 
@@ -44,13 +46,15 @@ class QueryBuilder<T> {
     }
 
     filter() {
-        const authorId = new mongoose.Types.ObjectId(
-            this.query?.filter as string,
-        )
+        const authorId = this?.query?.filter
 
-        this.modelQuery = this.modelQuery.find({
-            author: authorId,
-        })
+        if (authorId && mongoose.Types.ObjectId.isValid(authorId as string)) {
+            this.modelQuery = this.modelQuery.find({
+                author: new mongoose.Types.ObjectId(authorId as string),
+            })
+        } else if (authorId) {
+            throw new AppError(httpStatus.FORBIDDEN, 'Invalid author ID')
+        }
 
         return this
     }

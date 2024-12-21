@@ -69,9 +69,9 @@ const getAllBlogsFromDB = async (query: Record<string, unknown>) => {
         query,
     )
         .search(blogSearchableFields)
+        .filter()
         .sortBy()
         .sortOrder()
-    
 
     const result = await blogQuery.modelQuery
 
