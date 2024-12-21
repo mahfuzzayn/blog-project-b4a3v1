@@ -7,7 +7,7 @@ const registerUserIntoDB = async (payload: TUser) => {
     const isUserExists = await User.findOne({ email: payload?.email })
 
     if (isUserExists) {
-        throw new AppError(httpStatus.CONFLICT, 'User already exists')
+        throw new AppError(httpStatus.BAD_REQUEST, 'User already exists')
     }
 
     const newUser = await User.create(payload)
